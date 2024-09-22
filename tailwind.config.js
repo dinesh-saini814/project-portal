@@ -7,8 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "profile-icon": "url('/public/images/profile.png')",
+      },
       colors: {
-        background: "var(--background)",
+        background: "#fefefe",
         foreground: "var(--foreground)",
       },
     },
