@@ -1,8 +1,10 @@
+"use client";
 import SignIn from "./SignIn";
 import { HiMiniPencilSquare } from "react-icons/hi2";
-// import LogOut from "./LogOut";
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
+  const router = useRouter();
   return (
     <div>
       <nav className="flex justify-between items-center p-4">
@@ -11,7 +13,10 @@ const NavBar = () => {
         </h1>
 
         <div className=" flex gap-1 sm:gap-5">
-          <button className="w-42 h-5 p-5 bg-black rounded-full text-white flex-center">
+          <button
+            className="w-42 h-5 p-5 bg-black rounded-full text-white flex-center"
+            onClick={() => router.push("/new-post")}
+          >
             <span className="hidden sm:block">Create Project</span>
             <HiMiniPencilSquare className="sm:hidden" />
           </button>

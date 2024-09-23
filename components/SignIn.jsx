@@ -83,11 +83,8 @@ const SignIn = () => {
             {/* Dropdown menu */}
             {isDropdownOpen && (
               <div className="absolute top-full right-0 mt-2 bg-white border border-gray-200 rounded shadow-lg w-auto sm:w-40">
-                <ul className="flex flex-col gap-2 p-4">
-                  <li
-                    className="cursor-pointer hover:bg-gray-100"
-                    onClick={() => router.push("/dashboard")}
-                  >
+                <ul className="flex flex-col gap-2 p-4 text-black">
+                  <li className="cursor-pointer hover:bg-gray-100">
                     Dashboard
                   </li>
                   <li
