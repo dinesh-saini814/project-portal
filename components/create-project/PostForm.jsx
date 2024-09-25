@@ -8,6 +8,7 @@ import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { Loader } from "../Loader";
 import { auth } from "@/app/config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 const PostForm = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -20,6 +21,8 @@ const PostForm = () => {
 
   const [user, setUser] = useState(null);
   const [files, setFiles] = useState([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -88,6 +91,7 @@ const PostForm = () => {
     try {
       await addDoc(projectCollectionRef, inputs);
       setSubmit(false); // Reset submit state
+      router.push("/dashboard");
     } catch (error) {
       console.error("Error adding document: ", error);
     }

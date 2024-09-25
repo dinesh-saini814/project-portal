@@ -1,13 +1,8 @@
-"use client";
 import { useState } from "react";
-
-import PublicModal from "../publicProjecrs/PublicModal";
+import UserModal from "../project/UserModal";
 
 const UserProjects = (project) => {
-  console.log("projects", project.UserProjects);
-
   const [selectedProject, setSelectedProject] = useState(null);
-
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleOpenModal = (projectItem) => {
@@ -65,8 +60,9 @@ const UserProjects = (project) => {
         </div>
       ) : null}
       {selectedProject && (
-        <PublicModal
+        <UserModal
           project={selectedProject}
+          projectId={selectedProject.id}
           isOpen={isModalOpen}
           onClose={handleCloseModal}
         />

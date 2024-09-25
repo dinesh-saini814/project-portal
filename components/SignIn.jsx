@@ -108,12 +108,16 @@ const SignIn = () => {
   };
 
   // Close the dropdown when clicking outside
+  // Close the dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!event.target.closest(".dropdown")) {
+      const dropdownElement = document.querySelector(".dropdown");
+      // Check if the click was outside of the dropdown or profile icon
+      if (dropdownElement && !dropdownElement.contains(event.target)) {
         setIsDropdownOpen(false);
       }
     };
+
     document.addEventListener("click", handleClickOutside);
 
     return () => {

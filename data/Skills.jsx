@@ -54,6 +54,11 @@ const Skills = [
     name: "GraphQL",
     icon: "",
   },
+  {
+    id: 11,
+    name: "Other",
+    icon: "",
+  },
 ];
 
 export default { Skills };

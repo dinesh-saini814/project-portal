@@ -6,7 +6,6 @@ import { collection, getDocs, where, query } from "firebase/firestore";
 import { db } from "@/app/config/firebase";
 import UserProjects from "./UserProjects";
 import UserInfo from "./UserInfo";
-import PublicProjects from "../publicProjecrs/PublicProjects";
 
 const GetUserData = () => {
   // Define state variables to hold user data
@@ -18,7 +17,7 @@ const GetUserData = () => {
   });
 
   const [projects, setProjects] = useState([]);
-  const [publicProjects, setPublicProjects] = useState([]);
+  const [projectId, serProjectId] = useState([]);
   const [userId, setUserId] = useState(null);
 
   const projectCollection = collection(db, "Projects");
@@ -54,7 +53,11 @@ const GetUserData = () => {
         const q = query(projectCollection, where("userName", "==", userId));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-          setProjects((prevProjects) => [...prevProjects, doc.data()]);
+          const projectData = {
+            ...doc.data(), // Get all project data
+            id: doc.id, // Include the document ID
+          };
+          setProjects((prevProjects) => [...prevProjects, projectData]);
         });
       } catch (error) {
         console.log("Error getting documents:", error);
@@ -66,31 +69,10 @@ const GetUserData = () => {
     }
   }, [user, userId]); // Only run when the user state changes
 
-  // get public projects
-
-  useEffect(() => {
-    setPublicProjects([]); // Clear projects before fetching new ones
-    const getPublicProjects = async () => {
-      try {
-        const q = query(projectCollection, where("isPublic", "==", true));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          setPublicProjects((prevProjects) => [...prevProjects, doc.data()]);
-        });
-      } catch (error) {
-        console.log("Error getting documents:", error);
-      }
-    };
-
-    if (user) {
-      getPublicProjects(); // Fetch projects only when user is available
-    }
-  }, [user, userId]); // Only run when the user state changes
-
   return (
     <div>
       <UserInfo userInfo={userInfo} />
-      <UserProjects UserProjects={projects} />
+      <UserProjects UserProjects={projects} id={projectId} />
     </div>
   );
 };
