@@ -7,10 +7,8 @@ const PublicProjects = (PublicProjects) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleOpenModal = (projectItem) => {
-    console.log("Opening modal for project:", projectItem);
     setSelectedProject(projectItem); // Set the selected project item
     setModalOpen(true); // Open modal
-    console.log("Modal open state:", isModalOpen);
   };
 
   const handleCloseModal = () => {
@@ -61,7 +59,9 @@ const PublicProjects = (PublicProjects) => {
             </div>
           ))}
         </div>
-      ) : null}
+      ) : (
+        <div className="text-4xl text-black">Please Reload the page</div>
+      )}
       {/* Modal */}
       {selectedProject && (
         <PublicModal

@@ -204,7 +204,7 @@ const PostForm = () => {
           <input
             type="checkbox"
             name="isPublic"
-            checked={inputs.isPublic || false}
+            checked={inputs.isPublic || true}
             onChange={(e) =>
               setInputs({ ...inputs, isPublic: e.target.checked })
             }
@@ -287,7 +287,7 @@ const PostForm = () => {
             Demo URL
           </label>
           <input
-            type="url"
+            // type="url"
             name="demoUrl"
             onChange={handleChange}
             placeholder="https://demo.example.com"
@@ -300,7 +300,7 @@ const PostForm = () => {
             Figma URL
           </label>
           <input
-            type="url"
+            // type="url"
             name="figmaUrl"
             onChange={handleChange}
             placeholder="https://figma.example.com"
@@ -313,7 +313,7 @@ const PostForm = () => {
             YouTube URL
           </label>
           <input
-            type="url"
+            // type="url"
             name="youtubeUrl"
             onChange={handleChange}
             placeholder="https://youtube.example.com"
@@ -326,7 +326,7 @@ const PostForm = () => {
             GitHub URL
           </label>
           <input
-            type="url"
+            // type="url"
             name="githubUrl"
             onChange={handleChange}
             placeholder="https://github.example.com"
@@ -339,7 +339,7 @@ const PostForm = () => {
             Portfolio URL
           </label>
           <input
-            type="url"
+            // type="url"
             name="portfolioUrl"
             onChange={handleChange}
             placeholder="https://portfolio.example.com"

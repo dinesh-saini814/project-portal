@@ -43,9 +43,7 @@ const GetPublicProjects = () => {
       }
     };
 
-    if (user) {
-      getPublicProjects(); // Fetch projects only when user is available
-    }
+    getPublicProjects(); // Fetch projects only when user is available
   }, [user]); // Only run when the user state changes
 
   return (

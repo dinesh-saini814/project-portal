@@ -17,23 +17,23 @@ const PublicModal = ({ project, isOpen, onClose }) => {
       ></div>
 
       {/* Modal content */}
-      <div className="bg-white shadow-lg p-6 z-10 max-w-[70vw] max-h-[100vh]  rounded-[3rem]  transition-size duration-300 ease-in">
+      <div className="bg-white shadow-lg p-4  sm:p-6 z-10 w-full sm:w-[70vw] max-h-[100vh] sm:rounded-[3rem]  transition-size duration-300 ease-in md:max-w-[90vw] sm:max-w-[95vw] flex flex-col flex-wrap">
         <button
-          className="absolute w-10 h-10  top-10 left-10 text-white  shadow-sm bg-transparent hover:bg-gray-400 transition-all rounded-full  rotate-180 scale-110"
+          className="absolute w-10 h-10 top-5 left-2 sm:top-10 sm:left-10  bg-black text-white  shadow-sm sm:bg-transparent hover:bg-gray-400 transition-all rounded-full  rotate-180 sm:scale-110"
           onClick={onClose}
         >
           ➜
         </button>
 
-        <div className="sm:flex transition-size duration-300 ">
-          <div className="w-full  h-full sm:w-1/2 rounded-[3rem] ">
+        <div className="sm:flex flex-col md:flex-row transition-size duration-300 overflow-scroll sm:my-0 my-10">
+          <div className="w-full  h-full sm:w-1/2 rounded-[3rem] md:w-1/2 ">
             <img
               src={project.thumbnailImage}
               alt={project.title}
               className="w-full max-h-[90vh] rounded-[1rem] object-cover "
             />
           </div>
-          <div className="w-1/2 h-[32rem] pl-8 pt-6 text-black flex flex-col gap-4 overflow-y-auto">
+          <div className="w-full h-[32rem] pl-8 pt-6 text-black flex flex-col gap-4 sm:overflow-y-auto md:w-1/2">
             <h1 className=" font-sans text-2xl">{project.title}</h1>
             {project.portfolioUrl ? (
               <a className="link" href={project.portfolioUrl} target="_blank">
