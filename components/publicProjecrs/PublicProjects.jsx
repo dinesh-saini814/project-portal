@@ -59,9 +59,7 @@ const PublicProjects = (PublicProjects) => {
             </div>
           ))}
         </div>
-      ) : (
-        <div className="text-4xl text-black">Please Reload the page</div>
-      )}
+      ) : null}
       {/* Modal */}
       {selectedProject && (
         <PublicModal

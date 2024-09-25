@@ -12,6 +12,12 @@ const NavBar = () => {
           Project Portal
         </h1>
 
+        <div className="hidden sm:flex gap-5">
+          <h1 className="text-black text-base font-semibold underline cursor-pointer pt-5">
+            Explore/ Feed
+          </h1>
+        </div>
+
         <div className=" flex gap-1 sm:gap-5">
           <button
             className="w-42 h-5 p-5 bg-black rounded-full text-white flex-center"
