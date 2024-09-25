@@ -39,5 +39,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Images
 
-![Homepage Screenshot]([./images/image1.png](https://github.com/dinesh-saini814/project-portal/blob/main/public/images/Image1.png?raw=true))
+![Homepage Screenshot](https://github.com/dinesh-saini814/project-portal/blob/main/public/images/Image1.png?raw=true)
 (./images/image2.png)
