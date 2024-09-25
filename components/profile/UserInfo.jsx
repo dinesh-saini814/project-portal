@@ -1,38 +1,23 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { LiaEditSolid } from "react-icons/lia";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Link from "next/link";
+import { user } from "@nextui-org/theme";
 
-const UserInfo = () => {
-  // Define state variables to hold user data
-  const [user, setUser] = useState(null);
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [profileImage, setProfileImage] = useState("");
+const UserInfo = (userInfo) => {
+  const userName = userInfo.userInfo.userName || "NO USER FOUND";
+  const userEmail = userInfo.userInfo.userEmail;
+  const profileImage =
+    userInfo.userInfo.profileImage ||
+    "https://i.ibb.co/948VB6x/icons8-user-96.png";
+  console.log(userInfo);
 
-  const auth = getAuth();
-
-  useEffect(() => {
-    return onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-        setUserName(user.displayName);
-        setUserEmail(user.email);
-        setProfileImage(user.photoURL);
-      } else {
-        setUser(null);
-      }
-    });
-  }, [user]);
+  if (!userInfo.userInfo) return null;
 
   return (
     <div className="bg-purple-50 p-6">
       {/* Profile Section */}
-      <div className="relative bg-white shadow-md rounded-lg p-6 mb-10 max-w-4xl mx-auto">
-        <div className="flex  items-center gap-4 sm:gap-10">
+      <div className="relative bg-gray-100 shadow-md rounded-[3rem] p-6 mb-10 max-w-3xl h-[22rem] mx-auto flex flex-col justify-end">
+        <div className=" flex flex-col items-center text-center gap-4 sm:gap-5">
           {/* Profile Image */}
           <Image
             src={profileImage}
@@ -74,14 +59,6 @@ const UserInfo = () => {
             </div>
           </div>
         </div>
-        {/* Pencil icon for editing profile */}
-        <Link
-          href="/dashboard/edit-profile"
-          className="sm:px-3 w-10 sm:w-20 py-1 gap-1 flex-center text-black sm:border-[1px] border-purple-300 rounded-lg absolute top-5 right-5"
-        >
-          <LiaEditSolid className="size-6 sm:size-4" />
-          <span className="hidden sm:block">Edit</span>
-        </Link>
       </div>
     </div>
   );

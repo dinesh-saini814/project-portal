@@ -284,7 +284,7 @@ const PostForm = () => {
           </label>
           <input
             type="url"
-            name="demo-url"
+            name="demoUrl"
             onChange={handleChange}
             placeholder="https://demo.example.com"
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
@@ -297,7 +297,7 @@ const PostForm = () => {
           </label>
           <input
             type="url"
-            name="figma-url"
+            name="figmaUrl"
             onChange={handleChange}
             placeholder="https://figma.example.com"
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
@@ -310,7 +310,7 @@ const PostForm = () => {
           </label>
           <input
             type="url"
-            name="youtube-url"
+            name="youtubeUrl"
             onChange={handleChange}
             placeholder="https://youtube.example.com"
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
@@ -323,7 +323,7 @@ const PostForm = () => {
           </label>
           <input
             type="url"
-            name="github-url"
+            name="githubUrl"
             onChange={handleChange}
             placeholder="https://github.example.com"
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
@@ -336,7 +336,7 @@ const PostForm = () => {
           </label>
           <input
             type="url"
-            name="portfolio-url"
+            name="portfolioUrl"
             onChange={handleChange}
             placeholder="https://portfolio.example.com"
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"

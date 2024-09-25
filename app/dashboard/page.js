@@ -1,11 +1,9 @@
-import UserInfo from "@/components/profile/UserInfo";
-import UserProjects from "@/components/profile/UserProjects";
+import GetUserData from "@/components/profile/GetUserData";
 
 const page = () => {
   return (
     <div>
-      <UserInfo />
-      <UserProjects />
+      <GetUserData />
     </div>
   );
 };

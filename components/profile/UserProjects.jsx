@@ -1,109 +1,76 @@
 "use client";
-import { auth, db } from "@/app/config/firebase";
-import { collection, getDocs, where, query } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const UserProjects = () => {
-  const [projects, setProjects] = useState([]);
-  const [user, setUser] = useState(null);
-  const [userId, setUserId] = useState(null);
+import PublicModal from "../publicProjecrs/PublicModal";
 
-  const projectCollection = collection(db, "Projects");
+const UserProjects = (project) => {
+  console.log("projects", project.UserProjects);
 
-  // Check if user is authenticated and get their UID
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        setUserId(currentUser.uid);
-      } else {
-        setUser(null);
-        console.log("No user is signed in.");
-      }
-    });
+  const [selectedProject, setSelectedProject] = useState(null);
 
-    return () => unsubscribe(); // Cleanup on unmount
-  }, []);
+  const [isModalOpen, setModalOpen] = useState(false);
 
-  useEffect(() => {
-    const getUserProjects = async () => {
-      try {
-        const q = query(projectCollection, where("userName", "==", userId));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          console.log(doc.id, " => ", doc.data());
-        });
-      } catch (error) {
-        console.log("Error getting documents:", error);
-      }
-    };
+  const handleOpenModal = (projectItem) => {
+    setSelectedProject(projectItem); // Set the selected project item
+    setModalOpen(true); // Open modal
+  };
 
-    if (user) {
-      getUserProjects(); // Fetch projects only when user is available
-    }
-  }, [user]); // Only run when the user state changes
+  const handleCloseModal = () => {
+    setModalOpen(false); // Close modal
+    setSelectedProject(null);
+  };
 
   return (
     <div>
-      {/* Projects Section */}
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-xl font-semibold text-purple-600 mb-6">
-          My Projects
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Project Card */}
-          <div className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow">
-            <img
-              src=""
-              alt="Project Thumbnail"
-              className="w-full h-40 object-cover rounded-lg mb-4"
-            />
-            <h3 className="text-lg font-semibold text-black mb-2">
-              Project Title
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              A short description of the project goes here, explaining its
-              purpose and key features.
-            </p>
-            {/* Tags */}
-            <div className="flex space-x-2">
-              <span className="bg-purple-100 text-purple-700 text-xs font-medium px-2 py-1 rounded-full">
-                React
-              </span>
-              <span className="bg-purple-100 text-purple-700 text-xs font-medium px-2 py-1 rounded-full">
-                Firebase
-              </span>
+      {project.UserProjects ? (
+        <div className="lg:columns-4 sm:columns-2  columns-1  md:columns-3 space-y-4 p-4 gap-4 m-3">
+          {project.UserProjects.map((item) => (
+            <div>
+              <div
+                key={item.id}
+                className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg  overflow-auto cursor-pointer hover:scale-[.97] transition-all duration-300"
+                style={{ gridRowEnd: `span ${Math.ceil(item.height / 10)}` }} // Span dynamically based on content height
+                onClick={() => handleOpenModal(item)} // Pass the clicked item
+              >
+                {/* Replace 'item.height' with actual height calculation or content */}
+                <img
+                  src={item?.thumbnailImage}
+                  alt="images"
+                  className="h-auto rounded-lg mb-4 "
+                />{" "}
+                {/* Project image placeholder */}
+                <h3 className="text-lg font-semibold text-black mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                  {item.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {
+                    item.tags
+                      ? item.tags.map((tags, i) => (
+                          <span
+                            key={i}
+                            className="bg-purple-100 text-purple-700 text-xs font-medium px-2 py-1 rounded-full"
+                          >
+                            {tags}
+                          </span>
+                        ))
+                      : null // Optional fallback text
+                  }
+                </div>
+              </div>
             </div>
-          </div>
-
-          {/* Repeat for other projects */}
-          <div className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow">
-            <img
-              src=""
-              alt="Project Thumbnail"
-              className="w-full h-40 object-cover rounded-lg mb-4"
-            />
-            <h3 className="text-lg font-semibold text-black mb-2">
-              Project Title
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              A short description of the project goes here, explaining its
-              purpose and key features.
-            </p>
-            <div className="flex space-x-2">
-              <span className="bg-purple-100 text-purple-700 text-xs font-medium px-2 py-1 rounded-full">
-                Flutter
-              </span>
-              <span className="bg-purple-100 text-purple-700 text-xs font-medium px-2 py-1 rounded-full">
-                Tailwind
-              </span>
-            </div>
-          </div>
-
-          {/* Add more project cards as needed */}
+          ))}
         </div>
-      </div>
+      ) : null}
+      {selectedProject && (
+        <PublicModal
+          project={selectedProject}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };
